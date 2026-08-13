@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CLEAR – Dating Prototype Test v2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <main class="phone">
+      <div class="top"><div class="brand">CLEAR</div><div class="prog" id="prog"></div></div>
+      <div id="screen" class="screen"></div>
+    </main>
+    <aside class="mod" id="mod">
+      <h2>Moderator · v2</h2>
+      <p class="small">Nicht vorlesen, wenn die Testperson nicht festhängt.</p>
+      <div class="box"><b>Ziel dieses Screens</b><p id="goal"></p></div>
+      <div class="box"><b>Neutrale Frage</b><p id="probe"></p></div>
+      <div class="box"><b>Nur bei Unklarheit</b><p id="follow"></p></div>
+      <div class="box"><b>Beobachten</b><p id="observe"></p></div>
+      <textarea id="notes" placeholder="Wörtliche Aussagen, Zögern, Missverständnisse …"></textarea>
+      <button class="secondary" style="margin-top:8px" onclick="saveNotes()">Notizen merken</button>
+    </aside>
+  </div>
+  <script src="screens-a.js"></script>
+  <script src="screens-b.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
