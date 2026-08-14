@@ -1,6 +1,6 @@
 const V=[...(window.CLEAR_SCREENS_A||[]),...(window.CLEAR_SCREENS_B||[])];
-let i=0,enter=Date.now();
-const D={version:'2.3-marketplace',startedAt:new Date().toISOString(),choices:{},scales:{},text:{},events:[],times:{},notes:'',scenario:null};
+let i=0,enter=Date.now(),finishing=false;
+const D={version:'2.3-marketplace-firebase',startedAt:new Date().toISOString(),choices:{},scales:{},text:{},events:[],times:{},notes:'',scenario:null,testId:crypto.randomUUID()};
 const screen=document.getElementById('screen');
 
 function log(type,o={}){D.events.push({time:new Date().toISOString(),screen:V[i]?.id||'finished',type,...o})}
@@ -121,18 +121,28 @@ function saveNotes(){
   if(notes)D.notes=notes.value;
 }
 
-function finishTest(){
+function prepareResult(){
   storeText();saveNotes();
-  D.times[V[i].id]=(D.times[V[i].id]||0)+(Date.now()-enter);
-  D.completedAt=new Date().toISOString();
+  if(!D.completedAt)D.completedAt=new Date().toISOString();
   D.metrics={
     clarityChange:(D.scales.clarityAfter??0)-(D.scales.clarityBefore??0),
     mentalLoadChange:(D.scales.loadAfter??0)-(D.scales.loadBefore??0),
     marketplaceValue:D.scales.marketplaceValue??null,
     marketplaceIntent:D.choices.marketplaceIntent??null
   };
-  log('finished',{metrics:D.metrics});
-  screen.innerHTML=`<div class="eye">Fertig · 10 / 10</div><h1>Danke.</h1><p>Du hast den CLEAR Dating-App-Test abgeschlossen.</p><div class="card soft"><b>Aktuell werden die Daten noch nicht automatisch übertragen.</b><p class="small">Für den Pretest kannst du die Testdaten herunterladen.</p></div><button class="secondary" onclick="downloadData()">Testdaten herunterladen</button>`;
+  return D;
+}
+
+function renderFinished(status,message){
+  const success=status==='success';
+  screen.innerHTML=`<div class="eye">Fertig · 10 / 10</div>
+    <h1>Danke.</h1>
+    <p>Du hast den CLEAR Dating-App-Test abgeschlossen.</p>
+    <div class="card ${success?'soft':'warn'}">
+      <b>${success?'Ergebnis gespeichert.':'Ergebnis konnte nicht automatisch gespeichert werden.'}</b>
+      <p class="small">${message}</p>
+    </div>
+    ${success?'':`<button class="secondary" onclick="downloadData()">Testdaten herunterladen</button>`}`;
   document.getElementById('prog').textContent='10 / 10';
   document.getElementById('goal').textContent='Test abgeschlossen.';
   document.getElementById('probe').textContent='Was wäre für dich der wichtigste Grund, CLEAR als Dating-App auszuprobieren – oder nicht?';
@@ -140,9 +150,39 @@ function finishTest(){
   document.getElementById('observe').textContent='Besonders wichtig: Ist die Let-Them/Let-Me-Unterstützung ein echter Differenzierungsgrund oder nur ein nettes Zusatzfeature?';
 }
 
+async function waitForFirebase(maxMs=5000){
+  const started=Date.now();
+  while(!window.clearFirebase?.saveResult && Date.now()-started<maxMs){
+    await new Promise(resolve=>setTimeout(resolve,100));
+  }
+  if(!window.clearFirebase?.saveResult)throw new Error('Firebase-Modul wurde nicht geladen.');
+}
+
+async function finishTest(){
+  if(finishing)return;
+  finishing=true;
+  prepareResult();
+  log('finished',{metrics:D.metrics});
+  screen.innerHTML=`<div class="eye">Fertig · 10 / 10</div><h1>Danke.</h1><div class="card soft"><b>Ergebnis wird gespeichert …</b><p class="small">Du musst nichts verschicken.</p></div>`;
+  document.getElementById('prog').textContent='10 / 10';
+
+  try{
+    await waitForFirebase();
+    const timeout=new Promise((_,reject)=>setTimeout(()=>reject(new Error('Zeitüberschreitung beim Speichern.')),10000));
+    await Promise.race([window.clearFirebase.saveResult(D),timeout]);
+    D.storage={status:'saved',savedAtClient:new Date().toISOString()};
+    renderFinished('success','Deine Antworten wurden anonym gespeichert. Du musst nichts weiter tun.');
+  }catch(error){
+    console.error('CLEAR result storage failed',error);
+    D.storage={status:'failed',error:String(error?.message||error),failedAt:new Date().toISOString()};
+    renderFinished('error','Bitte lade die Ergebnisdatei herunter und gib sie der Person, die dir den Test geschickt hat.');
+  }finally{
+    finishing=false;
+  }
+}
+
 function downloadData(){
-  storeText();saveNotes();
-  if(!D.completedAt)D.completedAt=new Date().toISOString();
+  prepareResult();
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,2)],{type:'application/json'}));
   a.download=`clear-test-v2-3-marketplace-${new Date().toISOString().slice(0,10)}.json`;
