@@ -1,10 +1,83 @@
 window.CLEAR_SCREENS_B=[
-{id:'decide',html:`<div class="eye">Deine Entscheidung</div><h2>Was passt jetzt am besten zu dir?</h2><button class="opt" data-k="decision">Ich warte erst einmal ab.</button><button class="opt" data-k="decision">Ich frage einmal direkt nach.</button><button class="opt" data-k="decision">Ich möchte den Kontakt für mich loslassen.</button><button class="opt" data-k="decision">Ich weiß es noch nicht.</button><div class="card soft"><b>Wenn du direkt nachfragen willst:</b><p>„Hey Anna, ich fand unser Treffen schön. Hast du noch Lust, dich weiter kennenzulernen?“</p></div><div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,goal:'Eigene Handlung statt vorgegebener Lösung.',probe:'Welche Option wäre für dich am ehesten passend?',follow:'Fehlt dir eine Handlung, die du stattdessen wählen würdest?',observe:'Kein Urteil über die gewählte Option. Prüfe nur, ob sich die Person frei entscheiden kann.'},
-{id:'date',html:`<div class="eye">Neues Beispiel</div><h2>Ihr habt euch für ein zweites Date verabredet.</h2><p class="muted">Für den Test springen wir zur Situation direkt nach diesem Treffen.</p><div class="card"><b>Samstag · 16:00</b><p>Ihr wart ungefähr zwei Stunden zusammen.</p></div><div class="bottom"><button class="primary" onclick="next()">Nach dem Date</button></div>`,goal:'Szenariowechsel ohne Widerspruch zur vorherigen Nutzerentscheidung.',probe:'Ist klar, warum wir hier zu einem neuen Beispiel springen?',follow:'Was erwartest du als Nächstes?',observe:'Dieser Screen testet kein Date-Planungsfeature.'},
-{id:'reflection',html:`<div class="eye">Nach dem Date</div><h2>Wie hast du dich während des Treffens überwiegend gefühlt?</h2><button class="opt" data-k="feeling">Entspannt und wohl</button><button class="opt" data-k="feeling">Interessiert und neugierig</button><button class="opt" data-k="feeling">Unsicher oder angespannt</button><button class="opt" data-k="feeling">Unwohl</button><h3>Was ist konkret passiert?</h3><p class="muted small">Wähle nur Dinge, die du beobachten konntest.</p><button class="opt multi" data-k="datefact">Anna war wie vereinbart da.</button><button class="opt multi" data-k="datefact">Anna hat dir mehrere Fragen gestellt.</button><button class="opt multi" data-k="datefact">Anna hat selbst ein weiteres Treffen vorgeschlagen.</button><button class="opt multi" data-k="datefact">Anna hat sich an eure Absprachen gehalten.</button><div class="bottom"><button class="primary" onclick="next()">Speichern</button></div>`,goal:'Gefühl und beobachtbares Verhalten getrennt erfassen.',probe:'Was würdest du hier tatsächlich auswählen?',follow:'Gibt es etwas, das du nach einem Date eher festhalten würdest?',observe:'Nur beobachtbare Ereignisse als Fakten.'},
-{id:'reality',html:`<div class="eye">Reality Log</div><h2>Was Anna sagt – und was bisher passiert ist</h2><div class="card"><h3>Anna sagt</h3><p>„Ich suche eine feste Beziehung.“</p><div class="rule"></div><h3>Bisher beobachtet</h3><p>✓ zwei Dates<br>✓ hat das zweite Treffen mitgeplant<br>✓ war bei beiden Treffen wie vereinbart da<br>• schreibt zwischen den Dates eher wenig</p></div><h3>Wenn du nur auf diese Informationen schaust:</h3><p>Wie gut passt Annas Verhalten zu dem, was du suchst?</p><button class="opt" data-k="fit">Passt gut</button><button class="opt" data-k="fit">Kann ich noch nicht beurteilen</button><button class="opt" data-k="fit">Passt eher nicht</button><div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,goal:'Nutzen und mögliche Aversion gegen das Reality Log.',probe:'Was glaubst du, wozu dieser Screen da ist?',follow:'Was daran wäre für dich hilfreich oder unangenehm?',observe:'Neutral nach Nutzen und Unbehagen fragen.'},
-{id:'coach',html:`<div class="eye">CLEAR Coach</div><h2>„Sie sagt, sie hat viel Stress und schreibt deshalb wenig. Wie soll ich das einordnen?“</h2><div class="card"><h3>Was du weißt</h3><p>Ihr hattet zwei Dates. Anna hat das zweite Treffen mitgeplant. Zwischen den Dates schreibt sie eher wenig.</p></div><div class="card"><h3>Was offen bleibt</h3><p>Wie stark ihr Interesse ist und ob Stress der einzige Grund für wenig Kontakt ist.</p></div><div class="card soft"><h3>Was du für dich klären kannst</h3><p>Wie viel Kontakt brauchst du, damit sich Kennenlernen für dich gut anfühlt?</p></div><div class="bottom"><button class="primary" onclick="next()">Zum Abschluss</button></div>`,goal:'Mehrwert des strukturierten Coaches testen, ohne ChatGPT zu primen.',probe:'Was würdest du nach dieser Antwort als Nächstes tun?',follow:'Erinnert dich diese Art von Hilfe an etwas, das du heute schon nutzt?',observe:'Wenn ChatGPT spontan genannt wird, notieren. Nicht selbst zuerst nennen.'},
-{id:'survey',html:`<div class="eye">Abschluss</div><h2>Zum Schluss vier kurze Fragen</h2><h3>1. Wenn du an die gezeigte Situation denkst: Wie hilfreich war CLEAR?</h3><p class="muted small">1 = überhaupt nicht hilfreich · 5 = sehr hilfreich</p><div class="scale" data-scale="helpful"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div><h3>2. Wie leicht war zu verstehen, was du auf den Screens tun solltest?</h3><p class="muted small">1 = sehr schwer · 5 = sehr leicht</p><div class="scale" data-scale="ease"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div><h3>3. Wenn du in den nächsten Wochen in einer ähnlich unklaren Dating-Situation wärst: Würdest du CLEAR öffnen?</h3><button class="opt" data-k="useintent">Ja</button><button class="opt" data-k="useintent">Vielleicht</button><button class="opt" data-k="useintent">Nein</button><h3>4. Was war unklar, unnötig oder hat dir gefehlt?</h3><textarea id="freefeedback" placeholder="Bitte so konkret wie möglich …"></textarea><div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,goal:'Nutzen, Bedienbarkeit und konkrete Nutzungsabsicht.',probe:'Bitte beantworte die Fragen ohne weitere Erklärung.',follow:'Nur wenn etwas unverständlich ist: Was genau ist an der Frage unklar?',observe:'Keine Zahlungsfrage in Runde 1.'},
-{id:'teachback',html:`<div class="eye">Eine letzte Sache</div><h2>Wie würdest du CLEAR einer Freundin oder einem Freund in einem Satz erklären?</h2><textarea id="teachback" placeholder="CLEAR hilft mir dabei, …"></textarea><p class="muted small">Es gibt keine richtige Antwort. Uns interessiert, was bei dir angekommen ist.</p><div class="bottom"><button class="primary" onclick="finish()">Test abschließen</button></div>`,goal:'Unaided Teach-back statt Selbsteinschätzung.',probe:'Bitte erkläre CLEAR in deinen eigenen Worten.',follow:'Keine Hilfestellung geben.',observe:'PASS, wenn Beobachtung/Realität und eigene Entscheidung sinngemäß vorkommen.'},
-{id:'done',html:`<div class="eye">Fertig</div><h1>Danke.</h1><p>Das war der komplette Test.</p><div class="card soft"><b>Wir testen den Entwurf – nicht dich.</b><p class="small">Deine Antworten bleiben aktuell nur in diesem Browser. Die automatische Übertragung bauen wir erst im nächsten Schritt.</p></div><button class="secondary" onclick="downloadData()">Testdaten herunterladen</button>`,goal:'Abschluss.',probe:'Denke an deine letzte unklare Dating-Situation. An welcher Stelle hätte CLEAR geholfen – oder nicht?',follow:'Danach: Was würdest du aus CLEAR streichen? Was würdest du heute stattdessen benutzen?',observe:'Offene Antworten möglichst wörtlich notieren.'}
+{
+  id:'myPart',
+  html:`<div class="eye">Dein Teil</div>
+    <h2>Was ist dir beim Kennenlernen wichtig?</h2>
+    <p class="muted">Wähle alles, was für dich in dieser Situation wichtig wäre.</p>
+    <button class="opt multi" data-k="needs">Dass Initiative von beiden kommt.</button>
+    <button class="opt multi" data-k="needs">Dass wir regelmäßig Kontakt haben.</button>
+    <button class="opt multi" data-k="needs">Dass ich nicht ständig rätseln muss, woran ich bin.</button>
+    <button class="opt multi" data-k="needs">Dass ich jemandem Zeit lassen kann, ohne sofort Klarheit zu brauchen.</button>
+    <button class="opt multi" data-k="needs">Dass ich direkt ansprechen kann, wenn mich etwas beschäftigt.</button>
+    <button class="opt multi exclusive" data-k="needs">Ich weiß es gerade nicht.</button>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Perspektive vom Verhalten des anderen auf eigene Bedürfnisse verschieben.',
+  probe:'Was davon wäre dir in dieser Situation wirklich wichtig?',
+  follow:'Fehlt etwas Wichtiges in der Auswahl?',
+  observe:'Nicht bewerten, welche Bedürfnisse „gesund“ oder richtig sind.'
+},
+{
+  id:'action',
+  html:`<div class="eye">Deine Entscheidung</div>
+    <h2>Mit Blick auf das, was dir wichtig ist:</h2>
+    <div id="needsSummary" class="card soft"></div>
+    <h2>Was möchtest du jetzt tun?</h2>
+    <button class="opt" data-k="decision">Ich warte erst einmal ab.</button>
+    <button class="opt" data-k="decision">Ich schreibe [[NAME]] einmal und frage konkret nach einem Treffen.</button>
+    <button class="opt" data-k="decision">Ich lasse den nächsten Schritt erst einmal bei [[NAME]] und investiere nicht weiter.</button>
+    <button class="opt" data-k="decision">Ich weiß es noch nicht.</button>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Eine eigene Handlung ermöglichen, ohne eine richtige Lösung vorzugeben.',
+  probe:'Welche Option passt am ehesten zu dir?',
+  follow:'Fehlt eine Handlung, die du eher wählen würdest?',
+  observe:'Entscheidend ist Klarheit, nicht welche Option gewählt wird.'
+},
+{
+  id:'after',
+  html:`<div class="eye">Nach CLEAR</div>
+    <h2>Wie ist es für dich gerade?</h2>
+    <h3>Wie klar ist dir gerade, was du als Nächstes tun möchtest?</h3>
+    <p class="muted small">1 = überhaupt nicht klar · 5 = sehr klar</p>
+    <div class="scale" data-scale="clarityAfter"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div>
+    <h3 style="margin-top:24px">Wie stark beschäftigt dich die Situation gerade?</h3>
+    <p class="muted small">1 = gar nicht · 5 = sehr stark</p>
+    <div class="scale" data-scale="loadAfter"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Dieselben zwei Messgrößen wie vor CLEAR erneut erheben.',
+  probe:'Bitte beantworte beide Fragen noch einmal so, wie es sich jetzt für dich anfühlt.',
+  follow:'Keine Bewertung des Unterschieds vorwegnehmen.',
+  observe:'Kernsignal: Veränderung clarityBefore → clarityAfter. Mental Load ist sekundär.'
+},
+{
+  id:'realityTest',
+  html:`<div class="eye">Im echten Leben</div>
+    <h2>Stell dir vor, dir passiert in den nächsten Wochen wirklich etwas Ähnliches.</h2>
+    <h3>Würdest du CLEAR in so einer Situation öffnen?</h3>
+    <button class="opt" data-k="useIntent">Ja</button>
+    <button class="opt" data-k="useIntent">Vielleicht</button>
+    <button class="opt" data-k="useIntent">Nein</button>
+    <h3 style="margin-top:22px">Was würdest du heute ohne CLEAR am ehesten tun?</h3>
+    <button class="opt" data-k="alternative">Selbst darüber nachdenken</button>
+    <button class="opt" data-k="alternative">Mit Freund oder Freundin sprechen</button>
+    <button class="opt" data-k="alternative">ChatGPT oder einen anderen AI-Chat nutzen</button>
+    <button class="opt" data-k="alternative">Google, Reddit oder Social Media nutzen</button>
+    <button class="opt" data-k="alternative">Nichts Besonderes tun</button>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Testen, ob CLEAR einen realen Platz im bestehenden Verhalten gewinnen könnte.',
+  probe:'Bitte antworte so realistisch wie möglich, nicht so, wie es für das Produkt gut wäre.',
+  follow:'Warum würdest du wahrscheinlich genau das tun?',
+  observe:'„Ja“ allein reicht nicht. Besonders wichtig ist das heute tatsächlich genutzte Ersatzverhalten.'
+},
+{
+  id:'feedback',
+  html:`<div class="eye">Zum Schluss</div>
+    <h2>Was hat dir CLEAR in dieser Situation gebracht – oder was hat dir gefehlt?</h2>
+    <textarea id="freefeedback" placeholder="Zum Beispiel: Was war hilfreich, unklar, unnötig oder fehlte? …"></textarea>
+    <p class="muted small">Es gibt keine richtige Antwort. Kritik hilft uns mehr als Zustimmung.</p>
+    <div class="bottom"><button class="primary" onclick="finishTest()">Test abschließen</button></div>`,
+  goal:'Offenes, nicht suggestives Feedback nach dem eigentlichen Mess-Flow.',
+  probe:'Was würdest du am Produkt verändern oder weglassen?',
+  follow:'Gab es einen Moment, an dem du dachtest: Das brauche ich nicht?',
+  observe:'Wörtliche Formulierungen notieren; nicht verteidigen oder erklären.'
+}
 ];
