@@ -1,11 +1,86 @@
 window.CLEAR_SCREENS_A=[
-{id:'welcome',html:`<div class="eye">Prototype · v2</div><h1>Dating sollte dir helfen, klarer zu entscheiden.</h1><div class="quote">Lerne die Person kennen, die vor dir ist – nicht die, die du dir ausmalst.</div><div class="card soft"><b>Für diesen Test</b><p>Stell dir vor, du bist Single und möchtest grundsätzlich eine feste Beziehung. Klicke dich so durch, wie du es wirklich tun würdest. Wenn du mit jemandem zusammen testest, sag bitte laut, was dir durch den Kopf geht.</p></div><div class="bottom"><button class="primary" onclick="next()">Starten</button></div>`,goal:'Erster Eindruck ohne Erklärung des Let-Them-Prinzips.',probe:'Was erwartest du nach diesem Startscreen von der App?',follow:'Welche Formulierung ist unklar?',observe:'Kann die Person das Produkt grob einordnen, ohne dass du Klarheit, Coaching oder Let Them erklärst?'},
-{id:'intent',html:`<div class="eye">Dein Ziel</div><h2>Was suchst du gerade beim Dating?</h2><button class="opt" data-k="intent">Eine feste Beziehung</button><button class="opt" data-k="intent">Jemanden kennenlernen – mit der Möglichkeit auf eine Beziehung</button><button class="opt" data-k="intent">Offen kennenlernen, ohne festes Ziel</button><button class="opt" data-k="intent">Etwas Lockeres</button><div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,goal:'Beziehungsabsicht ohne Fachsprache.',probe:'Bitte wähle das aus, was für dich am ehesten passen würde.',follow:'Fehlt dir eine passende Antwort?',observe:'Zögern wegen unklarer Unterschiede zwischen den Optionen.'},
-{id:'boundaries',html:`<div class="eye">Was für dich passen muss</div><h2>Welche Punkte müssen für dich passen, damit du jemanden weiter kennenlernen möchtest?</h2><p class="muted">Wähle bis zu fünf. Du kannst auch nichts auswählen.</p><button class="opt multi" data-k="boundary">Wir suchen ungefähr dasselbe</button><button class="opt multi" data-k="boundary">Die Person ist zuverlässig bei Verabredungen</button><button class="opt multi" data-k="boundary">Unser Kinderwunsch passt zusammen</button><button class="opt multi" data-k="boundary">Die Entfernung ist für mich okay</button><button class="opt multi" data-k="boundary">Unser Umgang mit Rauchen passt</button><button class="opt multi" data-k="boundary">Unsere Vorstellung von Exklusivität passt</button><div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,goal:'Eigene Kriterien ohne schwer verständliche negative Grenzensprache.',probe:'Wähle die Punkte aus, die für dich wirklich wichtig wären.',follow:'Was bedeutet die Frage für dich?',observe:'Versteht die Person „passen muss“ oder liest sie die Liste nur als Wunschpartner-Konfigurator?'},
-{id:'daily',html:`<div class="eye">Heute</div><h2>Deine 3 Vorschläge für heute</h2><p class="muted">Du bekommst jeden Tag nur wenige Profile, damit du sie in Ruhe ansehen kannst.</p><div class="profile" onclick="next()"><div class="photo"><div><div class="name">Anna, 34</div><div>2 km entfernt</div></div></div><div style="padding:14px"><span class="tag">feste Beziehung</span><span class="tag">Kinder: vielleicht</span><p>„Ich mag Wochenenden draußen, gutes Essen und Menschen, die sagen, was sie meinen.“</p></div></div><p class="muted small">2 weitere Profile heute</p>`,goal:'Reaktion auf bewusst kleine Auswahl.',probe:'Was fällt dir auf diesem Screen auf?',follow:'Wie ist die Anzahl der Profile für dich?',observe:'Nicht fragen, ob drei Profile besser sind – das wäre suggestiv.'},
-{id:'profile',html:`<div class="eye">Anna, 34</div><h2>Was spricht dich an Annas Profil an?</h2><div class="card"><h3>Sie sucht</h3><p>Eine feste Beziehung</p><h3>Kommunikation</h3><p>Lieber persönlich als den ganzen Tag schreiben</p><h3>Alltag</h3><p>Köln · Produktdesignerin · gern draußen</p></div><button class="opt multi" data-k="curiosity">Ihre Art / Beschreibung</button><button class="opt multi" data-k="curiosity">Gemeinsame Interessen</button><button class="opt multi" data-k="curiosity">Ihre Beziehungsabsicht</button><button class="opt multi" data-k="curiosity">Körperliche Anziehung</button><button class="opt multi" data-k="curiosity">Noch nichts davon</button><div class="bottom"><button class="primary" onclick="next()">Profil weiter ansehen</button></div>`,goal:'Bewusstes Interesse statt reflexartigem Swipe.',probe:'Was würdest du hier auswählen?',follow:'Welche Information fehlt dir, bevor du jemanden kennenlernen würdest?',observe:'Nicht bewerten, ob die Person Anna attraktiv findet; nur Verständlichkeit und Informationsbedarf.'},
-{id:'match',html:`<div class="eye">Match</div><h1>Ihr mögt euch beide.</h1><p>Jetzt könnt ihr herausfinden, ob ihr euch auch im Gespräch und bei einem Treffen mögt.</p><div class="bottom"><button class="primary" onclick="next()">Gespräch ansehen</button></div>`,goal:'Erwartung nach einem Match.',probe:'Was erwartest du jetzt als Nächstes?',follow:'Ist etwas an diesem Screen unklar?',observe:'Erwartet die Person Chat, Date-Vorschlag, Coaching oder weiteres Swipen?'},
-{id:'chat',html:`<div class="eye">Nach dem ersten Date</div><h2>Euer letzter Chat</h2><div class="card"><div class="bubble">Der Kaffee gestern war wirklich schön 🙂</div><div class="bubble me">Fand ich auch. Ich würde dich gern wiedersehen.</div><div class="bubble">Sehr gern! Diese Woche ist nur komplett voll bei mir.</div><div class="bubble me">Kein Stress. Sag einfach, wann es bei dir passt.</div></div><div class="card warn"><b>Seit zwei Tagen keine neue Nachricht.</b></div><h3>Was geht dir als Erstes durch den Kopf?</h3><button class="opt" data-k="firstthought">Vielleicht hat sie gerade wenig Zeit.</button><button class="opt" data-k="firstthought">Vielleicht hat sie weniger Interesse.</button><button class="opt" data-k="firstthought">Vielleicht habe ich etwas Falsches gesagt.</button><button class="opt" data-k="firstthought">Ich weiß es nicht.</button><div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,goal:'Nur Gedanken messen; keine Handlungen mitmischen.',probe:'Lies die Situation und wähle, was deinem ersten Gedanken am nächsten kommt.',follow:'Wenn keine Antwort passt: Was wäre dein eigener erster Gedanke?',observe:'Spontane Interpretation notieren. Noch nicht nach gewünschter Handlung fragen.'},
-{id:'clarity',html:`<div class="eye">Clarity Check</div><h2>Was weißt du sicher – und was vermutest du nur?</h2><div class="card soft"><h3>Sicher</h3><p>Anna hat seit zwei Tagen nicht geantwortet.</p></div><div class="card"><h3>Mögliche Erklärungen</h3><p>Sie hat wenig Zeit.<br>Sie hat weniger Interesse.<br>Du hast etwas Falsches gesagt.</p></div><p class="muted">Die Erklärungen können stimmen. Du weißt es im Moment nur nicht.</p><div class="bottom"><button class="primary" onclick="next()">Verstanden</button></div>`,goal:'Kernmechanik: Beobachtung vs. Interpretation.',probe:'Was ist für dich der Unterschied zwischen den beiden Bereichen?',follow:'Welche Aussage hier weißt du wirklich sicher?',observe:'PASS: Keine Antwort = beobachtbar; der Grund = unklar.'},
-{id:'observe',html:`<div class="eye">Erst beobachten</div><h1>Du kennst den Grund nicht.</h1><div class="quote">Und du musst ihn gerade nicht erraten.</div><div class="card"><div class="check"><span class="dot">1</span><span>Schau auf das, was tatsächlich passiert.</span></div><div class="check"><span class="dot">2</span><span>Lass mögliche Erklärungen offen.</span></div><div class="check"><span class="dot">3</span><span>Entscheide dann, was für dich passt.</span></div></div><div class="bottom"><button class="primary" onclick="next()">Was möchte ich jetzt tun?</button></div>`,goal:'Kernprinzip ohne Let-Them-Jargon.',probe:'Was nimmst du aus diesem Screen mit?',follow:'Was würdest du danach konkret tun?',observe:'HARD FAIL, wenn nur „nichts tun / alles hinnehmen“ verstanden wird.'}
+{
+  id:'preference',
+  html:`<div class="eye">CLEAR · Prototype</div>
+    <h1>Eine kurze Dating-Situation</h1>
+    <p>Damit sich das Beispiel für dich grundsätzlich realistisch anfühlt:</p>
+    <h2>Wen würdest du beim Dating kennenlernen?</h2>
+    <button class="opt" data-k="partnerPreference">Frauen</button>
+    <button class="opt" data-k="partnerPreference">Männer</button>
+    <button class="opt" data-k="partnerPreference">Egal</button>
+    <p class="muted small">Es geht nur um die Person im Beispiel.</p>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Die Beispielsituation soll romantisch grundsätzlich anschlussfähig sein.',
+  probe:'Bitte wähle die Antwort, die für dich am ehesten passt.',
+  follow:'Keine weitere Erklärung nötig.',
+  observe:'Diese Auswahl ist keine Produkthypothese. Sie reduziert nur unnötige Distanz zum Szenario.'
+},
+{
+  id:'situation',
+  html:`<div class="eye">Die Situation</div>
+    <h2>Stell dir Folgendes vor</h2>
+    <p>Du hattest mit <b>[[NAME]]</b> ein erstes Date, das sich für dich gut angefühlt hat.</p>
+    <div class="card">
+      <div class="bubble">Der Abend war wirklich schön 🙂</div>
+      <div class="bubble me">Fand ich auch. Ich würde dich gern wiedersehen.</div>
+      <div class="bubble">Sehr gerne! Diese Woche ist bei mir ziemlich voll.</div>
+      <div class="bubble me">Gerne. Meld dich einfach, wenn du weißt, wann es passt.</div>
+    </div>
+    <div class="card warn"><b>Seitdem sind drei Tage vergangen.</b><p>Du hast nichts von [[NAME]] gehört.</p></div>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Eine einzige, realistische Unsicherheitssituation etablieren.',
+  probe:'Versetz dich kurz in diese Situation. Was geht dir spontan durch den Kopf?',
+  follow:'Nicht nach einer Lösung fragen; nur spontane Reaktion aufnehmen.',
+  observe:'Wirkt die Situation für die Person plausibel und emotional nachvollziehbar?'
+},
+{
+  id:'before',
+  html:`<div class="eye">Bevor CLEAR hilft</div>
+    <h2>Wie ist es für dich gerade?</h2>
+    <h3>Wie klar ist dir gerade, was du als Nächstes tun möchtest?</h3>
+    <p class="muted small">1 = überhaupt nicht klar · 5 = sehr klar</p>
+    <div class="scale" data-scale="clarityBefore"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div>
+    <h3 style="margin-top:24px">Wie stark beschäftigt dich die Situation gerade?</h3>
+    <p class="muted small">1 = gar nicht · 5 = sehr stark</p>
+    <div class="scale" data-scale="loadBefore"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button></div>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'Baseline für Klarheit und mentale Beschäftigung messen.',
+  probe:'Bitte beantworte beide Fragen so, wie es für dich in dieser Situation wäre.',
+  follow:'Nicht erklären oder interpretieren.',
+  observe:'Die gleichen Fragen kommen später wortgleich erneut.'
+},
+{
+  id:'knownOpen',
+  html:`<div class="eye">CLEAR sortiert</div>
+    <h2>Was du gerade weißt</h2>
+    <div class="card soft">
+      <p>✓ [[NAME]] hat gesagt, dass [[SUBJ]] dich gerne wiedersehen möchte.</p>
+      <p>✓ [[SUBJ_CAP]] hat gesagt, dass die Woche ziemlich voll ist.</p>
+      <p>✓ Seit drei Tagen kam keine neue Nachricht.</p>
+    </div>
+    <h2>Was offen ist</h2>
+    <div class="card">
+      <p>? Warum [[SUBJ]] sich nicht meldet.</p>
+      <p>? Wie groß [[POSS]] Interesse tatsächlich ist.</p>
+      <p>? Ob und wann [[SUBJ]] sich wieder meldet.</p>
+    </div>
+    <p class="muted">Für die offenen Punkte gibt es mehrere mögliche Erklärungen. Im Moment weißt du nicht, welche stimmt.</p>
+    <div class="bottom"><button class="primary" onclick="next()">Weiter</button></div>`,
+  goal:'CLEAR übernimmt die Trennung zwischen Beobachtung und Interpretation; kein Nutzer-Quiz.',
+  probe:'Was macht dieser Screen für dich?',
+  follow:'Ist etwas davon unverständlich oder wirkt falsch?',
+  observe:'Muss der Nutzer das Prinzip nicht benennen können; entscheidend ist, ob die Sortierung hilfreich wirkt.'
+},
+{
+  id:'theirPart',
+  html:`<div class="eye">[[NAME]]s Teil</div>
+    <h1>Was [[NAME]] tut, ist [[POSS]] Teil.</h1>
+    <div class="quote">Ob [[SUBJ]] schreibt, wann [[SUBJ]] schreibt und wie viel Initiative [[SUBJ]] zeigt, kannst du nicht steuern.</div>
+    <div class="card soft"><b>Du kannst beobachten, was passiert.</b><p>Du musst den Grund dafür nicht erraten oder für [[OBJ]] erklären.</p></div>
+    <div class="bottom"><button class="primary" onclick="next()">Was ist mein Teil?</button></div>`,
+  goal:'Der Let-Them-Kern: Verhalten des anderen nicht kontrollieren oder gedanklich auflösen.',
+  probe:'Was nimmst du aus diesem Screen mit?',
+  follow:'Wenn du nur „nichts tun“ verstehst: Was glaubst du, kommt als Nächstes?',
+  observe:'Problematisch wäre, wenn der Screen ausschließlich als passives Abwarten verstanden wird.'
+}
 ];
