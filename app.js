@@ -1,6 +1,6 @@
 const V=[...(window.CLEAR_SCREENS_A||[]),...(window.CLEAR_SCREENS_B||[])];
 let i=0,enter=Date.now();
-const D={version:'2.2-reduced',startedAt:new Date().toISOString(),choices:{},scales:{},text:{},events:[],times:{},notes:'',scenario:null};
+const D={version:'2.3-marketplace',startedAt:new Date().toISOString(),choices:{},scales:{},text:{},events:[],times:{},notes:'',scenario:null};
 const screen=document.getElementById('screen');
 
 function log(type,o={}){D.events.push({time:new Date().toISOString(),screen:V[i]?.id||'finished',type,...o})}
@@ -37,6 +37,8 @@ function personalizeText(value){
 function storeText(){
   const f=document.getElementById('freefeedback');
   if(f)D.text.freefeedback=f.value.trim();
+  const mf=document.getElementById('marketplaceFeedback');
+  if(mf)D.text.marketplaceFeedback=mf.value.trim();
 }
 
 function bind(){
@@ -104,7 +106,7 @@ function validationMessage(){
   if(id==='myPart'&&(!D.choices.needs||D.choices.needs.length===0))return 'Bitte wähle mindestens eine Option aus.';
   if(id==='action'&&!D.choices.decision)return 'Bitte wähle eine Option aus.';
   if(id==='after'&&(D.scales.clarityAfter==null||D.scales.loadAfter==null))return 'Bitte beantworte beide Fragen.';
-  if(id==='realityTest'&&(!D.choices.useIntent||!D.choices.alternative))return 'Bitte beantworte beide Fragen.';
+  if(id==='marketplaceTest'&&(D.scales.marketplaceValue==null||!D.choices.marketplaceIntent))return 'Bitte beantworte beide Fragen.';
   return null;
 }
 
@@ -125,15 +127,17 @@ function finishTest(){
   D.completedAt=new Date().toISOString();
   D.metrics={
     clarityChange:(D.scales.clarityAfter??0)-(D.scales.clarityBefore??0),
-    mentalLoadChange:(D.scales.loadAfter??0)-(D.scales.loadBefore??0)
+    mentalLoadChange:(D.scales.loadAfter??0)-(D.scales.loadBefore??0),
+    marketplaceValue:D.scales.marketplaceValue??null,
+    marketplaceIntent:D.choices.marketplaceIntent??null
   };
   log('finished',{metrics:D.metrics});
-  screen.innerHTML=`<div class="eye">Fertig · 10 / 10</div><h1>Danke.</h1><p>Du hast den Test abgeschlossen.</p><div class="card soft"><b>Aktuell werden die Daten noch nicht automatisch übertragen.</b><p class="small">Für den Pretest kannst du die Testdaten herunterladen.</p></div><button class="secondary" onclick="downloadData()">Testdaten herunterladen</button>`;
+  screen.innerHTML=`<div class="eye">Fertig · 10 / 10</div><h1>Danke.</h1><p>Du hast den CLEAR Dating-App-Test abgeschlossen.</p><div class="card soft"><b>Aktuell werden die Daten noch nicht automatisch übertragen.</b><p class="small">Für den Pretest kannst du die Testdaten herunterladen.</p></div><button class="secondary" onclick="downloadData()">Testdaten herunterladen</button>`;
   document.getElementById('prog').textContent='10 / 10';
   document.getElementById('goal').textContent='Test abgeschlossen.';
-  document.getElementById('probe').textContent='Was war der Moment mit dem größten oder kleinsten Nutzen?';
+  document.getElementById('probe').textContent='Was wäre für dich der wichtigste Grund, CLEAR als Dating-App auszuprobieren – oder nicht?';
   document.getElementById('follow').textContent='Nichts mehr erklären; offene Reaktion aufnehmen.';
-  document.getElementById('observe').textContent='Besonders wichtig: Würde die Person CLEAR in einer echten Situation tatsächlich öffnen?';
+  document.getElementById('observe').textContent='Besonders wichtig: Ist die Let-Them/Let-Me-Unterstützung ein echter Differenzierungsgrund oder nur ein nettes Zusatzfeature?';
 }
 
 function downloadData(){
@@ -141,7 +145,7 @@ function downloadData(){
   if(!D.completedAt)D.completedAt=new Date().toISOString();
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,2)],{type:'application/json'}));
-  a.download=`clear-test-v2-2-${new Date().toISOString().slice(0,10)}.json`;
+  a.download=`clear-test-v2-3-marketplace-${new Date().toISOString().slice(0,10)}.json`;
   a.click();
 }
 
